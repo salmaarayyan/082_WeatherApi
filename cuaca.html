@@ -123,7 +123,28 @@
                 alert('Masukkan nama lokasi terlebih dahulu!');
                 return;
             }
+
+            const cuacaInfo = document.getElementById('cuaca-info');
+            cuacaInfo.innerHTML = '<p class="loading">Loading...</p>';
+
+             const url = "http://api.weatherapi.com/v1/current.json?key=a78a0d7d89ca447a91110851250610&q=" + encodeURIComponent(lokasiInput) + "&aqi=no";
             
+            $.ajax({
+                url: url,
+                method: "GET",
+                success: function(data) {
+                    // Ambil data dari API
+                    const lokasi = data.location.name;
+                    const negara = data.location.country;
+                    const region = data.location.region || '-';
+                    const suhu = data.current.temp_c;
+                    const kelembapan = data.current.humidity;
+                    const latitude = data.location.lat;
+                    const longitude = data.location.lon;
+                })
+            
+
+
 
         }
     </script>
