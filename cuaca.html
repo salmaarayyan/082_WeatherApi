@@ -107,14 +107,15 @@
                 <button onclick="getCuaca()">GET</button>
             </div>
         </div>
-
+        
         <div class="info-section">
             <div id="cuaca-info">
                 <p class="loading">Masukkan lokasi dan klik GET untuk melihat info cuaca</p>
             </div>
         </div>
+    </div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         function getCuaca() {
             const lokasiInput = document.getElementById('lokasi-input').value.trim();
@@ -123,11 +124,11 @@
                 alert('Masukkan nama lokasi terlebih dahulu!');
                 return;
             }
-
+            
             const cuacaInfo = document.getElementById('cuaca-info');
             cuacaInfo.innerHTML = '<p class="loading">Loading...</p>';
-
-             const url = "http://api.weatherapi.com/v1/current.json?key=a78a0d7d89ca447a91110851250610&q=" + encodeURIComponent(lokasiInput) + "&aqi=no";
+            
+            const url = "http://api.weatherapi.com/v1/current.json?key=a78a0d7d89ca447a91110851250610&q=" + encodeURIComponent(lokasiInput) + "&aqi=no";
             
             $.ajax({
                 url: url,
@@ -141,9 +142,8 @@
                     const kelembapan = data.current.humidity;
                     const latitude = data.location.lat;
                     const longitude = data.location.lon;
-                })
-
-                // Tampilkan di console log
+                    
+                    // Tampilkan di console log
                     console.log("=== INFORMASI CUACA ===");
                     console.log("Lokasi : " + lokasi);
                     console.log("Negara : " + negara);
@@ -189,18 +189,21 @@
                             <div class="info-value">${longitude}</div>
                         </div>
                     `;
-                }
+                },
                 error: function(xhr, status, error) {
                     console.log("Error:", error);
                     cuacaInfo.innerHTML = '<p class="error">Gagal memuat data cuaca. Periksa nama lokasi dan coba lagi.</p>';
                 }
+            });
+        }
         
-
-        
+        // Event listener untuk Enter key
+        document.getElementById('lokasi-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                getCuaca();
+            }
+        });
     </script>
-
-    </div>
-
-
 </body>
+
 </html>
