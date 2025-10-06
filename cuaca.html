@@ -142,11 +142,61 @@
                     const latitude = data.location.lat;
                     const longitude = data.location.lon;
                 })
-            
 
+                // Tampilkan di console log
+                    console.log("=== INFORMASI CUACA ===");
+                    console.log("Lokasi : " + lokasi);
+                    console.log("Negara : " + negara);
+                    console.log("Provinsi : " + region);
+                    console.log("Suhu : " + suhu + "°C");
+                    console.log("Kelembapan : " + kelembapan + "%");
+                    console.log("Latitude : " + latitude);
+                    console.log("Longitude : " + longitude);
+                    console.log("========================");
+                    
+                    // Tampilkan di halaman web
+                    cuacaInfo.innerHTML = `
+                        <div class="info-item">
+                            <div class="info-label">Negara :</div>
+                            <div class="info-value">${negara}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Provinsi :</div>
+                            <div class="info-value">${region}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Kecamatan :</div>
+                            <div class="info-value">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Suhu :</div>
+                            <div class="info-value">${suhu}°C</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Kelembapan :</div>
+                            <div class="info-value">${kelembapan}%</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Lokasi :</div>
+                            <div class="info-value">${lokasi}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Latitude :</div>
+                            <div class="info-value">${latitude}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Longitude :</div>
+                            <div class="info-value">${longitude}</div>
+                        </div>
+                    `;
+                }
+                error: function(xhr, status, error) {
+                    console.log("Error:", error);
+                    cuacaInfo.innerHTML = '<p class="error">Gagal memuat data cuaca. Periksa nama lokasi dan coba lagi.</p>';
+                }
+        
 
-
-        }
+        
     </script>
 
     </div>
